@@ -13,37 +13,37 @@
     var oob_master = new Uint32Array(7);
     var spray = [];
     var a = performance.now();
-    // 0x10000 => 65536
     for (let i = 0; i < 65536; i++) {
-      const x = new Uint32Array(1);
-      x[`${spray.length}spray`] = 123;
-      spray.push(x);
+      let uint32_x = new Uint32Array(1);
+      uint32_x[`${spray.length}spray`] = 123;
+      spray.push(uint32_x);
     }
-    var b = performance.now();
-    alert(`Spraying Took: ${b - a}ms`);
+    console.log(spray);
+    console.log(`Spraying Took: ${performance.now() - a}ms`);
     var target = {
       a: 2.1100820415101592e-303,
       b: false,
       c: true,
       d: 5678
     };
-    var target2 = {
-      a: 2.1100820415101592e-303,
-      b: false,
-      c: true,
-      e: 5678
-    };
+    /*
+        var target2 = {
+          a: 2.1100820415101592e-303,
+          b: false,
+          c: true,
+          e: 5678
+        };*/
     var impl_idx = 0;
 
     function create_impl() {
-      var ans = {
+      let ans = {
         a: target
       };
-      for (var i = 0; i < 32; i += 1) {
-        ans[impl_idx++ + "x"] = {};
-      }
+      for (let i = 0; i < 32; i++)
+        ans[`${impl_idx++}x`] = {};
       return ans;
     }
+    console.log("impl_idx" + impl_idx);
 
     function trigger(x) {
       if (impl.a != target) {
@@ -135,8 +135,8 @@
 
     function read_mem_b(p, sz) {
       read_mem_setup(p, sz);
-      var b = new Uint8Array(sz);
-      b.set(oob_slave);
+      var b = new Uint8Array(sz)
+        .set(oob_slave);
       return b;
     }
 
@@ -152,7 +152,7 @@
     function write_mem(p, data) {
       i48_put(p, oob_master);
       oob_master[6] = data.length;
-      for (var i = 0; i < data.length; i += 1) {
+      for (var i = 0; i < data.length; i++) {
         oob_slave[i] = data[i];
       }
     }
@@ -176,7 +176,7 @@
     }
 
     function hex(x) {
-      return new Number(x).toString(16);
+      return Number(x).toString(16);
     }
     var malloc_nogc = [];
 
@@ -585,17 +585,16 @@
       }, 1000);
     }
     window.applicationCache.addEventListener("progress", DLProgress, false);
-    window.applicationCache.oncached = function(e) {
+    window.applicationCache.addEventListener("cached", function(e) {
       DisplayCacheProgress();
-    };
-    window.applicationCache.onupdateready = function(e) {
+    });
+    window.applicationCache.addEventListener("updateready", function(e) {
       DisplayCacheProgress();
-    };
-    window.applicationCache.onerror = function(e) {
+    });
+    window.applicationCache.addEventListener("error", function(e) {
       parent.cacheUPDtxt.innerHTML = "Error Installing Cache";
-    };
-  </script>
-  <script>
+    });
+
     function showdate() {
       var dt = new Date();
       Hour = dt.getHours();
@@ -621,50 +620,55 @@
       text-shadow: 4px 4px 4px black;
       color: white
     }
+
+    #debuglogs {
+      background: #333;
+      color: white;
+    }
   </style>
+
 </head>
 
-<body style='background-color:#1A1920'>
-  <div id=ScrOverlay class=cacheUPDbg>
-    <pre id=cacheUPDtxt class=cacheUPD></pre>
-    <div id=CacheProgress>
-      <div id=CacheBar></div>
-    </div>
+<body style="background-color:#1A1920">
+  <pre id="cacheUPDtxt" class="cacheUPD"></pre>
+  <div id="CacheProgress">
+    <div id="CacheBar"></div>
+  </div>
   </div>
   <br><span id="date"></span><span id="clock"></span>
-  <h1 style='font-size:25px;text-align:center;text-shadow: 4px 4px 4px black;color:yellow;'>
-    <a class="button" style="color: green;text-shadow: 4px 4px 4px black;font-size:120%; font-weight: bold;">Pass = <span id=passCounter></span></a>
-	  <span style="margin-left:70px;margin-right:70px;">Karo Host Light 6.72 FW (<span style="color:green;">Improved</span>)</span>
-    <a class="button2" style="color: red;text-shadow: 4px 4px 4px black;font-size:120%; font-weight: bold;">Fail = <span id=failCounter></span> </a>
+  <h1 style="font-size:25px;text-align:center;text-shadow: 4px 4px 4px black;color:yellow;">
+    <a class="button" style="color: green;text-shadow: 4px 4px 4px black;font-size:120%; font-weight: bold;">Pass = <span id="passCounter"></span></a>
+    <span style="margin-left:70px;margin-right:70px;">Karo Host Light 6.72 FW (<span style="color:green;">Improved</span>)</span>
+    <a class="button2" style="color: red;text-shadow: 4px 4px 4px black;font-size:120%; font-weight: bold;">Fail = <span id="failCounter"></span> </a>
     <br>
-    <h1 id=msgs2 style='font-size:25px;text-align:center;text-shadow: 4px 4px 4px black;color:white;'>Status</h1>
+    <h1 id="msgs2" style="font-size:25px;text-align:center;text-shadow: 4px 4px 4px black;color:white;">Status</h1>
     <div style="text-align:center" id="MyItems">
       <br>
-      <button style='font-size:26px;text-align:center;text-shadow: 4px 4px 4px black;width: 220px;height: 60px;color:#CEC52A' class="pointer" onMouseOver="msgs2.innerHTML='GoldHen v2.1.2 By SiSTRO'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_hen('goldhen_212_672.bin'); return false">GoldHenV2.1.2</button>
-      <button style='font-size:26px;text-align:center;text-shadow: 4px 4px 4px black;width: 220px;height: 60px;color:#CEC52A' class="pointer" onMouseOver="msgs2.innerHTML='GoldHen v2.2.4 By SiSTRO'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_hen('goldhen_2.2.4_672.bin'); return false">GoldHenV2.2.4</button>
-      <button style='font-size:26px;text-align:center;text-shadow: 4px 4px 4px black;width: 220px;height: 60px;color:white' class="pointer" onMouseOver="msgs2.innerHTML='Copy json and shn files from USB to PS4'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('CopyCH.bin'); return false">Cheat Copy</button>
+      <button data-title="Enable Homebrew" style="font-size:26px;text-align:center;text-shadow: 4px 4px 4px black;width: 220px;height: 60px;color:#CEC52A" class="pointer" onMouseOver="msgs2.innerHTML='GoldHen v2.1.2 By SiSTRO';" onmouseout="msgs2.innerHTML='Status'" onclick="load_hen('goldhen_212_672.bin'); return false">GoldHenV2.1.2</button>
+      <button style="font-size:26px;text-align:center;text-shadow: 4px 4px 4px black;width: 220px;height: 60px;color:#CEC52A" class="pointer" onMouseOver="msgs2.innerHTML='GoldHen v2.2.4 By SiSTRO';" onmouseout="msgs2.innerHTML='Status'" onclick="load_hen('goldhen_2.2.4_672.bin'); return false">GoldHenV2.2.4</button>
+      <button style="font-size:26px;text-align:center;text-shadow: 4px 4px 4px black;width: 220px;height: 60px;color:white" class="pointer" onMouseOver="msgs2.innerHTML='Copy json and shn files from USB to PS4';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('CopyCH.bin'); return false">Cheat Copy</button>
       <br><br><br>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Loads a bin file sent to the PS4 IP address on port 9021'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_binloader(); return false"> Bin Loader </button>
-      <button style='font-size:22px;text-align:center;text-shadow: 4px 4px 4px black;color:white' class="pointer" onMouseOver="msgs2.innerHTML='HEN 2.1.3 By SiSTRO'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_hen('hen213.bin'); return false">Hen_v2.1.3 </button>
-      <button style='font-size:22px;text-align:center;text-shadow: 4px 4px 4px black;color:white' class="pointer" onMouseOver="msgs2.innerHTML='HEN 2.1.3 By SiSTRO & Leeful'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_hen('hen213b.bin'); return false">Hen_v2.1.3b </button>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='A full access FTP server for the PS4'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_FTP.bin'); return false"> FTP </button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Loads a bin file sent to the PS4 IP address on port 9021';" onmouseout="msgs2.innerHTML='Status'" onclick="load_binloader(); return false"> Bin Loader </button>
+      <button style="font-size:22px;text-align:center;text-shadow: 4px 4px 4px black;color:white" class="pointer" onMouseOver="msgs2.innerHTML='HEN 2.1.3 By SiSTRO';" onmouseout="msgs2.innerHTML='Status'" onclick="load_hen('hen213.bin'); return false">Hen_v2.1.3 </button>
+      <button style="font-size:22px;text-align:center;text-shadow: 4px 4px 4px black;color:white" class="pointer" onMouseOver="msgs2.innerHTML='HEN 2.1.3 By SiSTRO & Leeful';" onmouseout="msgs2.innerHTML='Status'" onclick="load_hen('hen213b.bin'); return false">Hen_v2.1.3b </button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='A full access FTP server for the PS4';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_FTP.bin'); return false"> FTP </button>
       <br><br>
-      <button style='font-size:20px;text-align:center;background-color:blue;text-shadow: 4px 4px 4px black;color:white' class="pointer" onMouseOver="msgs2.innerHTML='A large collection of trainers for your PS4 games'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('WebRTE.bin'); return false"> WebRTE </button>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Save Data Mounter'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_ps4debug.bin'); return false"> PS4debug </button>
-      <button style='font-size:22px;text-align:center;text-shadow: 4px 4px 4px black;background-color:red;color:white' class="pointer" onMouseOver="msgs2.innerHTML='Orbis Toolbox Loader Alfa 1190'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('Orbis-Toolbox-672.bin'); return false">Orbis Toolbox </button>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Move installed games to an external USB drive'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_app2usb.bin'); return false"> App2USB </button>
+      <button style="font-size:20px;text-align:center;background-color:blue;text-shadow: 4px 4px 4px black;color:white" class="pointer" onMouseOver="msgs2.innerHTML='A large collection of trainers for your PS4 games';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('WebRTE.bin'); return false"> WebRTE </button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Save Data Mounter';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_ps4debug.bin'); return false"> PS4debug </button>
+      <button style="font-size:22px;text-align:center;text-shadow: 4px 4px 4px black;background-color:red;color:white" class="pointer" onMouseOver="msgs2.innerHTML='Orbis Toolbox Loader Alfa 1190';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('Orbis-Toolbox-672.bin'); return false">Orbis Toolbox </button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Move installed games to an external USB drive';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_app2usb.bin'); return false"> App2USB </button>
       <br><br>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Creates dummy files in the PS4 update folder'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_updatesDisable.bin'); return false">Disable Update</button>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Removes the dummy files in the PS4 update folder'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_updatesEnable.bin'); return false"> Enable Update </button>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Disable the auto opening of the last page used in the PS4 WebBrowser'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_historyBlocker.bin'); return false"> History Blocker </button>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='unlocks some debug features available on testkit'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_ToDEX.bin'); return false"> ToDex </button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Creates dummy files in the PS4 update folder';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_updatesDisable.bin'); return false">Disable Update</button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Removes the dummy files in the PS4 update folder';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_updatesEnable.bin'); return false"> Enable Update </button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Disable the auto opening of the last page used in the PS4 WebBrowser';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_historyBlocker.bin'); return false"> History Blocker </button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='unlocks some debug features available on testkit';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_ToDEX.bin'); return false"> ToDex </button>
       <br><br>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Dump Game only to a USB drive to be able to create fpkg files'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_DumperG.bin'); return false"> Dumper Game </button>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Dump Update Game only to a USB drive to be able to create fpkg files'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_DumperU.bin'); return false"> Dumper Update</button>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Dump Game+Update to a USB drive to be able to create fpkg files'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_DumperGU.bin'); return false"> Dumper G+U </button>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Dump Game+Update Merged to a USB drive to be able to create fpkg files'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_DumperM.bin'); return false"> Dumper G+U M</button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Dump Game only to a USB drive to be able to create fpkg files';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_DumperG.bin'); return false"> Dumper Game </button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Dump Update Game only to a USB drive to be able to create fpkg files';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_DumperU.bin'); return false"> Dumper Update</button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Dump Game+Update to a USB drive to be able to create fpkg files';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_DumperGU.bin'); return false"> Dumper G+U </button>
+      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='Dump Game+Update Merged to a USB drive to be able to create fpkg files';" onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('pl_DumperM.bin'); return false"> Dumper G+U M</button>
       <br><br>
-      <button class="pointer btnstyle" onMouseOver="msgs2.innerHTML='A full access FTP server for the PS4'" ; onmouseout="msgs2.innerHTML='Status'" onclick="load_Pl('gta138.bin'); return false"> GTA v1.38 </button>
+
       <br>
     </div>
     <div class="content">
@@ -681,7 +685,7 @@
 
       function load_hen(x) {
         PLfile = x;
-        msgs2.innerHTML = "Jailbreaking... please wait";
+        msgs2.innerHTML = "Jailbreaking please wait";
         LoadedMSG = "Payload Loaded";
         setTimeout(function() {
           var script = document.createElement('script');
