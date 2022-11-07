@@ -1,14 +1,197 @@
-<!DOCTYPE html>
-<html>
+<html manifest="mainpage.cache">
 
 <head>
 
+  <meta charset="utf-8" />
+  <title>Karo Host Light 6.72 FW</title>
+  <link rel="stylesheet" href="Style.css" type="text/css" />
+  <script>
+    function DLProgress(e) {
+      parent.ScrOverlay.style.display = "block";
+      Percent = (Math.round(e.loaded / e.total * 100));
+      parent.cacheUPDtxt.innerHTML = "Installing Offline Cache: " + Percent + "%";
+      parent.CacheBar.style.width = Percent + '%';
+    }
+
+    function DisplayCacheProgress() {
+      setTimeout(function() {
+        parent.cacheUPDtxt.innerHTML = "Cache Installed Successfully.Restart the PS4 & Reopen the Browser!!";
+      }, 1000);
+    }
+    window.applicationCache.addEventListener("progress", DLProgress, false);
+    window.applicationCache.addEventListener("cached", function(e) {
+      DisplayCacheProgress();
+    });
+    window.applicationCache.addEventListener("updateready", function(e) {
+      DisplayCacheProgress();
+    });
+    window.applicationCache.addEventListener("error", function(e) {
+      parent.cacheUPDtxt.innerHTML = "Error Installing Cache";
+    });
+
+    function showdate() {
+      var dt = new Date();
+      Hour = dt.getHours();
+      Minute = dt.getMinutes();
+      Day = dt.getDate();
+      Month = dt.getMonth() + 1;
+      Year = dt.getFullYear();
+      if (Minute < 10) {
+        Minute = "0" + Minute;
+      };
+      if (Hour < 10) {
+        Hour = "0" + Hour;
+      };
+      document.getElementById("date").innerHTML = (Day + "/" + Month + "/" + Year);
+      document.getElementById("clock").innerHTML = (Hour + ":" + Minute);
+    }
+    setInterval(showdate, 0);
+  </script>
+  <style type="text/css">
+    .btnstyle {
+      font-size: 20px;
+      text-align: center;
+      text-shadow: 4px 4px 4px black;
+      color: white
+    }
+
+    #debuglogs {
+      background: #333;
+      color: white;
+    }
+
+    body.c15 {
+      background-color: #1A1920
+    }
+
+    a.c14 {
+      font-size: 30px;
+      text-align: center;
+      text-shadow: 4px 4px 4px black;
+      color: white;
+    }
+
+    span.c13 {
+      text-shadow: 4px 4px 4px black;
+    }
+
+    div.c12 {
+      text-align: center
+    }
+
+    button.c11 {
+      font-size: 22px;
+      text-align: center;
+      text-shadow: 4px 4px 4px black;
+      background-color: red;
+      color: white
+    }
+
+    button.c10 {
+      font-size: 20px;
+      text-align: center;
+      background-color: blue;
+      text-shadow: 4px 4px 4px black;
+      color: white
+    }
+
+    button.c9 {
+      font-size: 22px;
+      text-align: center;
+      text-shadow: 4px 4px 4px black;
+      color: white
+    }
+
+    button.c8 {
+      font-size: 26px;
+      text-align: center;
+      text-shadow: 4px 4px 4px black;
+      width: 220px;
+      height: 60px;
+      color: white
+    }
+
+    button.c7 {
+      font-size: 26px;
+      text-align: center;
+      text-shadow: 4px 4px 4px black;
+      width: 220px;
+      height: 60px;
+      color: #CEC52A
+    }
+
+    h1.c6 {
+      font-size: 25px;
+      text-align: center;
+      text-shadow: 4px 4px 4px black;
+      color: white;
+    }
+
+    h1.c5 {
+      font-size: 25px;
+      text-align: center;
+      text-shadow: 4px 4px 4px black;
+      color: yellow;
+    }
+
+    a.c4 {
+      color: red;
+      text-shadow: 4px 4px 4px black;
+      font-size: 120%;
+      font-weight: bold;
+    }
+
+    span.c3 {
+      margin-left: 70px;
+      margin-right: 70px;
+    }
+
+    span.c2 {
+      color: green;
+    }
+
+    a.c1 {
+      color: green;
+      text-shadow: 4px 4px 4px black;
+      font-size: 120%;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
-<body>
-  <script>
-    window.location.href = "http://a0zhar.github.io/karo218/672L/index.html";
-  </script>
+<body class="c15">
+  <div id="ScrOverlay" class="cacheUPDbg">
+    <pre id="cacheUPDtxt" class="cacheUPD"></pre>
+    <div id="CacheProgress">
+      <div id="CacheBar"></div>
+    </div>
+  </div>
+  <br>
+  <span id="date"></span>
+  <span id="clock"></span>
+  <h1 class="c5">
+    <a class="button c1">Pass =
+      <span id="passCounter"></span></a>
+    <span class="c3">Karo Host Light 6.72 FW (
+      <span class="c2">Improved</span>)</span>
+    <a class="button2 c4">Fail =
+      <span id="failCounter"></span></a>
+  </h1>
+  <br />
+  <h1 id="msgs2" class="c6">Status</h1>
+
+  <div class="content text">
+    <br />
+    <span class="yellow c13">Designed, Compiled by :</span>&nbsp;&nbsp;
+    <span class="hue c13">Karo Sharifi</span>
+    <br />
+    <br />
+    <br />
+    <br />
+    <span class="yellow c13">Super Special Thanks To :</span>&nbsp;&nbsp;
+    <a class="c14">Sleirsgoevy ,SiSTRo ,Leeful ,AlAzif ....</a>
+  </div>
+
 </body>
 
 </html>
