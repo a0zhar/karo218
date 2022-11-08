@@ -1,35 +1,12 @@
-<html >
+<html>
 
 <head>
 
   <meta charset="utf-8" />
-  <title>Karo Host Light 6.72 FW</title>
-  <link rel="stylesheet" href="/672L/Style.css" type="text/css" />
+  <title>Karo Host (custom by a0zhar)</title>
+  <link rel="stylesheet" href="672L/Style.css" type="text/css" />
 
   <script>
-    function DLProgress(e) {
-      parent.ScrOverlay.style.display = "block";
-      Percent = (Math.round(e.loaded / e.total * 100));
-      parent.cacheUPDtxt.innerHTML = "Installing Offline Cache: " + Percent + "%";
-      parent.CacheBar.style.width = Percent + '%';
-    }
-
-    function DisplayCacheProgress() {
-      setTimeout(function() {
-        parent.cacheUPDtxt.innerHTML = "Cache Installed Successfully.Restart the PS4 & Reopen the Browser!!";
-      }, 1000);
-    }
-    window.applicationCache.addEventListener("progress", DLProgress, false);
-    window.applicationCache.addEventListener("cached", function(e) {
-      DisplayCacheProgress();
-    });
-    window.applicationCache.addEventListener("updateready", function(e) {
-      DisplayCacheProgress();
-    });
-    window.applicationCache.addEventListener("error", function(e) {
-      parent.cacheUPDtxt.innerHTML = "Error Installing Cache";
-    });
-
     function showdate() {
       var dt = new Date();
       Hour = dt.getHours();
@@ -122,7 +99,6 @@
     }
 
     h1.c6 {
-      font-size: 25px;
       text-align: center;
       text-shadow: 4px 4px 4px black;
       color: white;
@@ -161,28 +137,17 @@
 </head>
 
 <body class="c15">
-  <div id="ScrOverlay" class="cacheUPDbg">
-    <pre id="cacheUPDtxt" class="cacheUPD"></pre>
-    <div id="CacheProgress">
-      <div id="CacheBar"></div>
-    </div>
-  </div>
   <br>
   <span id="date"></span>
   <span id="clock"></span>
   <h1 class="c5">
-    <a class="button c1">Pass =
-      <span id="passCounter"></span></a>
-    <span class="c3">Karo Host Light 6.72 FW (
-      <span class="c2">Improved</span>)</span>
-    <a class="button2 c4">Fail =
-      <span id="failCounter"></span></a>
+    <span class="c3">Karo Host Custom <span>
   </h1>
   <br />
-  <h1 id="msgs2" class="c6">Status</h1>
+  <h1 id="" class="c6">SELECT UR CURRENT FW</h1>
   <div class="c12" id="MyItems">
     <br />
-    <a class="pointer c7" href="672L/index.html">Go To</a>
+    <button class="pointer c7" onclick="window.location.href='/672L/index.html';">FW 6.72(lite)</button>
   </div>
   <div class="content text">
     <br />
