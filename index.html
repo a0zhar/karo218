@@ -7,23 +7,17 @@
   <link rel="stylesheet" href="672L/Style.css" type="text/css" />
 
   <script>
-    function showdate() {
+    window.addEventListener("load", function() {
       var dt = new Date();
-      Hour = dt.getHours();
-      Minute = dt.getMinutes();
-      Day = dt.getDate();
-      Month = dt.getMonth() + 1;
-      Year = dt.getFullYear();
-      if (Minute < 10) {
-        Minute = "0" + Minute;
-      };
-      if (Hour < 10) {
-        Hour = "0" + Hour;
-      };
-      document.getElementById("date").innerHTML = (Day + "/" + Month + "/" + Year);
-      document.getElementById("clock").innerHTML = (Hour + ":" + Minute);
-    }
-    setInterval(showdate, 0);
+      document.getElementById("date").innerHTML = (dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear());
+      setInterval(() => {
+        var Hour = dt.getHours();
+        var Minute = dt.getMinutes();
+        if (Minute < 10) Minute = "0" + Minute;
+        if (Hour < 10) Hour = "0" + Hour;
+        document.getElementById("clock").innerHTML = (Hour + ":" + Minute);
+      }, 10);
+    });
   </script>
   <style type="text/css">
     .btnstyle {
