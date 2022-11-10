@@ -1,3 +1,15 @@
-# Karo218 Host (custom)
+# A Custom Version of Karo218's PS4 Host...
 
-**Basically the same as His, but with custom modifications/improvements. mainly for personal use but yeah, keeping payloads up to date**
+**It's basically the same as his, but with custom modifications and improvements.** <br>
+**This is primarily for personal use, but I decided to make it public.**
+
+<details>
+<summary>(Beta) Changelog </summary>
+
+    Update v0.1 (2022/11/10)   Whats new?
+      + Cangelog added to Repo!
+      
+      ! An upcoming feature is the translation of the Default English Host into the following languages: 
+           Russian, Arabic, Chinese, Spanish, Korean, Turkish, German, Italian, and Hindi.
+          
+</details>
