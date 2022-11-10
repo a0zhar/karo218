@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html manifest="offline_ru.cache">
+
+<head>
+  <meta charset="utf-8" />
+  <title>KARO218 Exploit Host (Lite) for PS4(Firmware 6.72) BY A0ZHAR.</title>
+  <link rel="stylesheet" href="../Style.css" type="text/css" />
+  <script src="../exploit.js"></script>
+  <script src="../jb.js"></script>
+  <script>
+    window.addEventListener("load", function() {
+      function DLProgress(e) {
+        document.getElementById("ScrOverlay").style.display = "block";
+        var Percent = Math.round((e.loaded / e.total) * 100);
+        document.getElementById("cacheUPDtxt").innerHTML = "Кэширование для автономного использования, текущее состояние:" + Percent + "% готово";
+        document.getElementById("CacheBar").style.width = Percent + "%";
+      }
+
+      function DisplayCacheProgress() {
+        setTimeout(function() {
+         document.getElementById("cacheUPDtxt").innerHTML  = "Этот сайт был успешно закэширован. Пожалуйста, перезапустите браузер PS4!";
+        }, 1000);
+      }
+      window.applicationCache.addEventListener("progress", DLProgress, false);
+      window.applicationCache.addEventListener("cached", DisplayCacheProgress);
+      window.applicationCache.addEventListener("updateready", DisplayCacheProgress);
+      window.applicationCache.addEventListener("error", function() {
+        document.getElementById("cacheUPDtxt").innerHTML = "Произошла ошибка при кэшировании этого сайта....";
+      });
+      var dt = new Date();
+      document.getElementById("date").innerHTML = dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+      setInterval(() => {
+        var hrs = dt.getHours();
+        var min = dt.getMinutes();
+        document.getElementById("clock").innerHTML = ((hrs < 10) ? "0" + hrs : hrs) + ":" + ((min < 10) ? "0" + min : min);
+      }, 1000);
+    });
+  </script>
+</head>
+
+  <body><h1>Пожалуйста, будьте терпеливы; остальная часть этого файла появится сегодня.</h1></body>
+
+</html>
