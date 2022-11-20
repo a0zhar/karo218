@@ -1,0 +1,41 @@
+CACHE MANIFEST 
+
+# The (.bin) Files (inside /BinFiles dir)
+BinFiles/CopyCH.bin
+BinFiles/goldhen_212_672.bin
+BinFiles/goldhen_2.2.4_672.bin
+BinFiles/hen213.bin
+BinFiles/hen213b.bin
+BinFiles/Orbis-Toolbox-672.bin
+BinFiles/pl_app2usb.bin
+BinFiles/pl_DumperG.bin
+BinFiles/pl_DumperGU.bin
+BinFiles/pl_DumperM.bin
+BinFiles/pl_DumperU.bin
+BinFiles/pl_FTP.bin
+BinFiles/pl_historyBlocker.bin
+BinFiles/pl_ps4debug.bin
+BinFiles/pl_ToDEX.bin
+BinFiles/pl_updatesDisable.bin
+BinFiles/pl_updatesEnable.bin
+BinFiles/WebRTE.bin
+
+# The Website Files
+# JS FILES
+common/exploit.js
+common/syscalls.js
+common/exp_loader.js
+common/jb.js
+common/pls_loader.js
+../bootstrap/bootstrap.js
+
+#CSS FILES
+../bootstrap/bootstrap.css
+../ourstyle.css
+
+#html
+index.html
+
+
+NETWORK:
+*

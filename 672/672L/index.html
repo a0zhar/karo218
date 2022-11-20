@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-US" manifest="offlinexmb.cache">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Karo Host Light 6.72 FW</title>
+
+  <link rel="stylesheet" href="../bootstrap/bootstrap.css" />
+  <link rel="stylesheet" href="../ourstyle.css" />
+
+  <script>
+    window.addEventListener("load", function() {
+      function DLProgress(e) {
+        document.getElementById("ScrOverlay").style.display = "block";
+        var Percent = Math.round((e.loaded / e.total) * 100);
+        document.getElementById("cacheUPDtxt").innerHTML = "Installing Offline Cache: " + Percent + "%";
+        document.getElementById("CacheBar").style.width = Percent + "%";
+      }
+
+      function DisplayCacheProgress() {
+        setTimeout(function() {
+          document.getElementById("cacheUPDtxt").innerHTML = "Cache Installed Successfully.Restart the PS4 & Reopen the Browser!!";
+        }, 1000);
+      }
+      window.applicationCache.addEventListener("progress", function() {
+        document.getElementById("ScrOverlay").style.display = "block";
+        var Percent = Math.round((e.loaded / e.total) * 100);
+        document.getElementById("cacheUPDtxt").innerHTML = "Installing Offline Cache: " + Percent + "%";
+        document.getElementById("CacheBar").style.width = Percent + "%";
+      }, false);
+      window.applicationCache.addEventListener("cached", DisplayCacheProgress);
+      window.applicationCache.addEventListener("updateready", DisplayCacheProgress);
+      window.applicationCache.addEventListener("error", function() {
+        document.getElementById("cacheUPDtxt").innerHTML = "Error Installing Cache";
+      });
+      var dt = new Date();
+      document.getElementById("date").innerHTML =
+        dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+      setInterval(() => {
+        var hrs = dt.getHours();
+        var min = dt.getMinutes();
+        document.getElementById("clock").innerHTML =
+          (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min);
+      }, 0);
+      if (localStorage.passcount == null) localStorage.passcount = 0;
+      if (localStorage.failcount == null) localStorage.failcount = 0;
+    });
+
+    function logMessage(msg, id) {
+      document.getElementById(id).textContent += msg + "\r\n";
+    }
+  </script>
+
+</head>
+
+<body>
+  <div id="logarea" style="display: none; ">
+    <nav class="navbar navbar-expand-md p-0 bg-dark">
+      <div class="container-fluid">
+        <div class="navbar-brand text-white">Displaying Logs&nbsp;<span class="badge bg-success ">Experimental</span>
+        </div>
+
+        <div class="navbar-text" style="width: fit-content; float: right">
+          <button id="closelogs" class="text-white btn-close"></button>
+        </div>
+      </div>
+    </nav>
+    <div class="container w-100 h-75 my-3">
+      <textarea class="w-100 h-100" id="logs"></textarea>
+    </div>
+  </div>
+  <div style="display:block;" class="m-0" id="mainarea">
+    <div id="ScrOverlay" class="cacheUPDbg">
+      <pre id="cacheUPDtxt" class="cacheUPD"></pre>
+      <div id="CacheProgress">
+        <div id="CacheBar"></div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-md bg-dark border-bottom">
+      <div class="container-fluid">
+        <div id="date" class="nav-link my-0 p-0 ml-3" style="vertical-align: middle;">20/11/2022</div>
+        <div class="container navbar-nav mx-auto">
+          <div class="navbar-nav mx-auto">
+            <div class="nav-link" style="vertical-align: middle;">
+              <span class="badge bg-success mx-3 " id="passCounter" style="vertical-align: middle;">0</span>
+              <span class="mx-3  text-warning text-center fw-bold p-0 " style="font-size:25px;vertical-align: middle;">Karo Host Light (mod by a0zhar)</span>
+              <span class="badge bg-danger mx-3" id="failCounter" style="vertical-align: middle;">0</span>
+            </div>
+          </div>
+        </div>
+        <div id="clock" class="nav-link my-0 mr-3" style="vertical-align: middle;">16:31</div>
+      </div>
+    </nav>
+    <div class="container-fluid ">
+      <a id="showbtn" class="badge bg-secondary" style="display: inline; float:left; margin:0;text-decoration: none;">Show Logs</a>
+      <div class="container mx-auto">
+        <nav class="navbar navbar-expand-md p-1 rounded-bottom bg-dark w-50  mx-auto">
+          <div class="navbar-nav mx-auto">
+            <span id="msgs2">status</span>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container mx-auto p-3 mt-5 text-center" id="MyItems">
+
+      <button class="btn mx-1 my-2 btn-dark btn-outline-warning" data-myinfo="GoldHen v2.1.2 By SiSTRO" onclick="load_hen('goldhen_212_672.bin'); ">
+        GoldHenV2.1.2
+      </button>
+      <button class="btn mx-1 my-2 btn-dark btn-outline-warning" data-myinfo="GoldHen v2.2.4 By SiSTRO" onclick="load_hen('goldhen_2.2.4_672.bin'); ">
+        GoldHenV2.2.4
+      </button>
+      <button class="btn mx-1 my-2 btn-dark btn-outline-warning" data-myinfo="HEN 2.1.3 By SiSTRO" onclick="load_hen('hen213.bin'); ">
+        Hen_v2.1.3
+      </button>
+      <button class="btn mx-1 my-2 btn-dark btn-outline-warning" data-myinfo="HEN 2.1.3 By SiSTRO &amp; Leeful" onclick="load_hen('hen213b.bin'); ">
+        Hen_v2.1.3b
+      </button>
+      <br>
+      <button class="btn mx-1 my-2 btn-dark " data-myinfo="Copy json and shn files from USB to PS4" onclick="load_Pl('CopyCH.bin'); ">
+        Cheat Copy
+      </button>
+
+      <button class="btn mx-1 my-2 btn-dark text-white" data-myinfo="Loads a bin file sent to the PS4 IP address on port 9021" onclick="load_binloader(); ">
+        Bin Loader
+      </button>
+
+      <button class="btn mx-1 my-2 btn-dark" data-myinfo="A full access FTP server for the PS4" onclick="load_Pl('pl_FTP.bin'); ">
+        FTP
+      </button>
+
+      <button class="btn mx-1 my-2 btn-dark btn-outline-info" data-myinfo="A large collection of trainers for your PS4 games" onclick="load_Pl('WebRTE.bin'); ">
+        WebRTE
+      </button>
+      <br>
+
+      <button class="btn mx-1 my-2 btn-dark btn-outline-success" data-myinfo="Save Data Mounter" onclick="load_Pl('pl_ps4debug.bin'); ">
+        PS4debug
+      </button>
+      <button class="btn mx-1 my-2 btn-dark btn-outline-danger" data-myinfo="Orbis Toolbox Loader Alfa 1190" onclick="load_Pl('Orbis-Toolbox-672.bin'); ">
+        Orbis Toolbox
+      </button>
+      <button class="btn mx-1 my-2 btn-dark" data-myinfo="Move installed games to an external USB drive" onclick="load_Pl('pl_app2usb.bin'); ">
+        App2USB
+      </button>
+
+      <button class="btn mx-1 my-2 btn-dark" data-myinfo="Creates dummy files in the PS4 update folder" onclick="load_Pl('pl_updatesDisable.bin'); ">
+        Disable Update
+      </button> <br>
+
+      <button class="btn mx-1 my-2 btn-dark" data-myinfo="Removes the dummy files in the PS4 update folder" onclick="load_Pl('pl_updatesEnable.bin'); ">
+        Enable Update
+      </button>
+      <button class="btn mx-1 my-2 btn-dark" data-myinfo="Disable the auto opening of the last page used in the PS4 WebBrowser" onclick="load_Pl('pl_historyBlocker.bin'); ">
+        History Blocker
+      </button>
+      <button class="btn mx-1 my-2 btn-dark" data-myinfo="unlocks some debug features available on testkit" onclick="load_Pl('pl_ToDEX.bin'); ">
+        ToDex
+      </button>
+
+      <button class="btn mx-1 my-2 btn-dark" data-myinfo="Dump Game only to a USB drive to be able to create fpkg files" onclick="load_Pl('pl_DumperG.bin'); ">
+        Dump G
+      </button> <br>
+
+      <button class="btn mx-1 my-2 btn-dark" data-myinfo="Dump Update Game only to a USB drive to be able to create fpkg files" onclick="load_Pl('pl_DumperU.bin'); ">
+        Dump U
+      </button>
+      <button class="btn mx-1 my-2 btn-dark" data-myinfo="Dump Game+Update to a USB drive to be able to create fpkg files" onclick="load_Pl('pl_DumperGU.bin'); ">
+        Dump G+U
+      </button>
+      <button class="btn mx-1 my-2 btn-dark" data-myinfo="Dump Game+Update Merged to a USB drive to be able to create fpkg files" onclick="load_Pl('pl_DumperM.bin'); ">
+        Dump G+U M
+      </button>
+
+    </div>
+    <div class="content text">
+      <br>
+      <span class="yellow c13">Designed, Compiled by :</span>&nbsp;&nbsp;
+      <span class="hue c13">Karo Sharifi</span>
+      <br>
+      <br>
+      <br>
+      <br>
+      <span class="yellow c13">Super Special Thanks To :</span>&nbsp;&nbsp;
+      <a class="c14">Sleirsgoevy ,SiSTRo ,Leeful ,AlAzif ....</a>
+    </div>
+  </div>
+  <script src="common/exploit.js"></script>
+  <script src="common/syscalls.js"></script>
+  <script src="common/jb.js"></script>
+  <script>
+    document.getElementById("passCounter").innerHTML = localStorage.passcount;
+    document.getElementById("failCounter").innerHTML = localStorage.failcount;
+    document.querySelectorAll("*[data-myinfo]").forEach((e) => {
+      e.addEventListener("mouseover", function() {
+        document.getElementById("msgs2").innerHTML =
+          e.getAttribute("data-myinfo");
+      });
+      e.addEventListener("mouseout", function() {
+        document.getElementById("msgs2").innerHTML =
+          "status";
+      });
+    });
+
+    function load_hen(x) {
+      PLfile = "BinFiles/" + x;
+      msgs2.innerHTML = "Jailbreaking please wait";
+      LoadedMSG = "Payload Loaded";
+      setTimeout(function() {
+        var script = document.createElement("script");
+        script.src = "common/exp_loader.js";
+        document.getElementsByTagName("head")[0].appendChild(script);
+      }, 3000);
+      setTimeout(jailbreak, 500);
+    }
+
+    function load_Pl(x) {
+      PLfile = "BinFiles/" + x;
+      msgs2.innerHTML = "Payload loading... please wait";
+      LoadedMSG = "Payload Loaded";
+      var script = document.createElement("script");
+      script.src = "common/pls_loader.js";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    }
+    var current = false;
+    var elm = document.getElementById("logarea"),
+      closebtn = document.getElementById("closelogs"),
+      showbtn = document.getElementById("showbtn");
+
+    function showlogs() {
+      current = !current;
+      elm.style.display = current ? "block" : "none";
+      showbtn.style.display = current ? "none" : "block";
+      document.getElementById("mainarea").style.display = current ? "none" : "block";
+    }
+    closebtn.addEventListener("click", showlogs);
+    showbtn.addEventListener("click", showlogs);
+  </script>
+  <script src="../bootstrap/bootstrap.js"></script>
+
+</body>
+
+</html>
