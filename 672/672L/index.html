@@ -10,46 +10,39 @@
   <link rel="stylesheet" href="../ourstyle.css" />
 
   <script>
-   window.addEventListener("load", function () {
-  function DLProgress(e) {
-    document.getElementById("ScrOverlay").style.display = "block";
-    var Percent = Math.round((e.loaded / e.total) * 100);
-    document.getElementById("cacheUPDtxt").innerHTML =
-      "Installing Offline Cache: " + Percent + "%";
-    document.getElementById("CacheBar").style.width = Percent + "%";
-  }
+    window.addEventListener("load", function() {
+      function DLProgress(e) {
+        document.getElementById("ScrOverlay").style.display = "block";
+        var Percent = Math.round((e.loaded / e.total) * 100);
+        document.getElementById("cacheUPDtxt").innerHTML = "Installing Offline Cache: " + Percent + "%";
+        document.getElementById("CacheBar").style.width = Percent + "%";
+      }
 
-  function DisplayCacheProgress() {
-    setTimeout(function () {
-      document.getElementById("cacheUPDtxt").innerHTML =
-        "Cache Installed Successfully.Restart the PS4 & Reopen the Browser!!";
-    }, 1000);
-  }
-  window.applicationCache.addEventListener(
-    "progress",
-    function (e) {
-      DLProgress(e);
-    },
-    false
-  );
-  window.applicationCache.addEventListener("cached", DisplayCacheProgress);
-  window.applicationCache.addEventListener("updateready", DisplayCacheProgress);
-  window.applicationCache.addEventListener("error", function () {
-    document.getElementById("cacheUPDtxt").innerHTML = "Error Installing Cache";
-  });
-  var dt = new Date();
-  document.getElementById("date").innerHTML =
-    dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
-  setInterval(() => {
-    var hrs = dt.getHours();
-    var min = dt.getMinutes();
-    document.getElementById("clock").innerHTML =
-      (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min);
-  }, 0);
-  if (localStorage.passcount == null) localStorage.passcount = 0;
-  if (localStorage.failcount == null) localStorage.failcount = 0;
-});
-
+      function DisplayCacheProgress() {
+        setTimeout(function() {
+          document.getElementById("cacheUPDtxt").innerHTML = "Page Cached successfully, reloading....";
+        }, 1000);
+      }
+      window.applicationCache.addEventListener("progress", function(e) {
+        DLProgress(e);
+      }, false);
+      window.applicationCache.addEventListener("cached", DisplayCacheProgress);
+      window.applicationCache.addEventListener("updateready", DisplayCacheProgress);
+      window.applicationCache.addEventListener("error", function() {
+        document.getElementById("cacheUPDtxt").innerHTML = "Error Installing Cache";
+      });
+      var dt = new Date();
+      document.getElementById("date").innerHTML =
+        dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+      setInterval(() => {
+        var hrs = dt.getHours();
+        var min = dt.getMinutes();
+        document.getElementById("clock").innerHTML =
+          (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min);
+      }, 0);
+      if (localStorage.passcount == null) localStorage.passcount = 0;
+      if (localStorage.failcount == null) localStorage.failcount = 0;
+    });
 
     function logMessage(msg, id) {
       document.getElementById(id).textContent += msg + "\r\n";
@@ -76,9 +69,9 @@
   </div>
   <div style="display:block;" class="m-0" id="mainarea">
     <div id="ScrOverlay" class="cacheUPDbg">
-      <pre id="cacheUPDtxt" class="cacheUPD"></pre>
-      <div id="CacheProgress">
-        <div id="CacheBar"></div>
+      <a id="cacheUPDtxt" class="cacheUPD"></a>
+      <div class="progress" id="CacheProgress">
+        <div class="progress-bar" role="progressBar" id="CacheBar"></div>
       </div>
     </div>
     <nav class="navbar navbar-expand-md bg-dark border-bottom">
@@ -88,7 +81,7 @@
           <div class="navbar-nav mx-auto">
             <div class="nav-link" style="vertical-align: middle;">
               <span class="badge bg-success mx-3 " id="passCounter" style="vertical-align: middle;">0</span>
-              <span class="mx-3  text-warning text-center fw-bold p-0 " style="font-size:25px;vertical-align: middle;">Karo Host Light (mod by a0zhar)</span>
+              <span class="mx-3  text-warning text-center fw-bold p-0 " style="font-size:25px;vertical-align: middle;">KARO218 6.72 HOST(MODDED) => BY A0ZHAR</span>
               <span class="badge bg-danger mx-3" id="failCounter" style="vertical-align: middle;">0</span>
             </div>
           </div>
@@ -104,6 +97,18 @@
             <span id="msgs2">status</span>
           </div>
         </nav>
+      </div>
+    </div>
+
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header bg-info text-white">
+          <strong class="me-auto">Message from A0zhar</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body bg-black text-white">
+          I hope you have a good day. Please report any bugs you may find to my disc, which I'm currently creating:
+        </div>
       </div>
     </div>
 
@@ -180,14 +185,15 @@
     </div>
     <div class="content text">
       <br>
-      <span class="yellow c13">Designed, Compiled by :</span>&nbsp;&nbsp;
-      <span class="hue c13">Karo Sharifi</span>
+      <span class="yellow c13">Original Dev: </span>&nbsp;&nbsp;<span class="hue c13">Karo Sharifi</span>
+      <span class="yellow c13">Customized/Modded By:</span>&nbsp;&nbsp;<span class="hue c13">A0zhar</span><br>
       <br>
-      <br>
-      <br>
-      <br>
-      <span class="yellow c13">Super Special Thanks To :</span>&nbsp;&nbsp;
-      <a class="c14">Sleirsgoevy ,SiSTRo ,Leeful ,AlAzif ....</a>
+      <br> <br><br>
+
+      <span class="yellow c13">super special thanks to </span>&nbsp;&nbsp;<a class="c14">Karo, Sleirsgoevy ,SiSTRo ,Leeful ,AlAzif </a>
+      <br><br><br><br>
+
+      <span class="yellow c13">and ps4krar for being the first to fork my repo. </span>
     </div>
   </div>
   <script src="common/exploit.js"></script>
@@ -242,6 +248,11 @@
     showbtn.addEventListener("click", showlogs);
   </script>
   <script src="../bootstrap/bootstrap.js"></script>
+  <script>
+    const toastLiveExample = document.getElementById('liveToast');
+    const toast = new bootstrap.Toast(toastLiveExample);
+    toast.show();
+  </script>
 
 </body>
 
