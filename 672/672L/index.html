@@ -10,42 +10,46 @@
   <link rel="stylesheet" href="../ourstyle.css" />
 
   <script>
-    window.addEventListener("load", function() {
-      function DLProgress(e) {
-        document.getElementById("ScrOverlay").style.display = "block";
-        var Percent = Math.round((e.loaded / e.total) * 100);
-        document.getElementById("cacheUPDtxt").innerHTML = "Installing Offline Cache: " + Percent + "%";
-        document.getElementById("CacheBar").style.width = Percent + "%";
-      }
+   window.addEventListener("load", function () {
+  function DLProgress(e) {
+    document.getElementById("ScrOverlay").style.display = "block";
+    var Percent = Math.round((e.loaded / e.total) * 100);
+    document.getElementById("cacheUPDtxt").innerHTML =
+      "Installing Offline Cache: " + Percent + "%";
+    document.getElementById("CacheBar").style.width = Percent + "%";
+  }
 
-      function DisplayCacheProgress() {
-        setTimeout(function() {
-          document.getElementById("cacheUPDtxt").innerHTML = "Cache Installed Successfully.Restart the PS4 & Reopen the Browser!!";
-        }, 1000);
-      }
-      window.applicationCache.addEventListener("progress", function() {
-        document.getElementById("ScrOverlay").style.display = "block";
-        var Percent = Math.round((e.loaded / e.total) * 100);
-        document.getElementById("cacheUPDtxt").innerHTML = "Installing Offline Cache: " + Percent + "%";
-        document.getElementById("CacheBar").style.width = Percent + "%";
-      }, false);
-      window.applicationCache.addEventListener("cached", DisplayCacheProgress);
-      window.applicationCache.addEventListener("updateready", DisplayCacheProgress);
-      window.applicationCache.addEventListener("error", function() {
-        document.getElementById("cacheUPDtxt").innerHTML = "Error Installing Cache";
-      });
-      var dt = new Date();
-      document.getElementById("date").innerHTML =
-        dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
-      setInterval(() => {
-        var hrs = dt.getHours();
-        var min = dt.getMinutes();
-        document.getElementById("clock").innerHTML =
-          (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min);
-      }, 0);
-      if (localStorage.passcount == null) localStorage.passcount = 0;
-      if (localStorage.failcount == null) localStorage.failcount = 0;
-    });
+  function DisplayCacheProgress() {
+    setTimeout(function () {
+      document.getElementById("cacheUPDtxt").innerHTML =
+        "Cache Installed Successfully.Restart the PS4 & Reopen the Browser!!";
+    }, 1000);
+  }
+  window.applicationCache.addEventListener(
+    "progress",
+    function (e) {
+      DLProgress(e);
+    },
+    false
+  );
+  window.applicationCache.addEventListener("cached", DisplayCacheProgress);
+  window.applicationCache.addEventListener("updateready", DisplayCacheProgress);
+  window.applicationCache.addEventListener("error", function () {
+    document.getElementById("cacheUPDtxt").innerHTML = "Error Installing Cache";
+  });
+  var dt = new Date();
+  document.getElementById("date").innerHTML =
+    dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear();
+  setInterval(() => {
+    var hrs = dt.getHours();
+    var min = dt.getMinutes();
+    document.getElementById("clock").innerHTML =
+      (hrs < 10 ? "0" + hrs : hrs) + ":" + (min < 10 ? "0" + min : min);
+  }, 0);
+  if (localStorage.passcount == null) localStorage.passcount = 0;
+  if (localStorage.failcount == null) localStorage.failcount = 0;
+});
+
 
     function logMessage(msg, id) {
       document.getElementById(id).textContent += msg + "\r\n";
