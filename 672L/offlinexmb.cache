@@ -27,6 +27,8 @@ BinFiles/hen213b.bin
 common/exploit.js
 common/exp_loader.js
 common/jb.js
+functions.js
+messages.js
 common/pls_loader.js
 ../bootstrap/bootstrap.js
 
