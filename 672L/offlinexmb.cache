@@ -1,11 +1,7 @@
 CACHE MANIFEST 
 
-# The (.bin) Files (inside /BinFiles dir)
+# Payloads
 BinFiles/CopyCH.bin
-BinFiles/goldhen_212_672.bin
-BinFiles/goldhen_2.2.4_672.bin
-BinFiles/hen213.bin
-BinFiles/hen213b.bin
 BinFiles/Orbis-Toolbox-672.bin
 BinFiles/pl_app2usb.bin
 BinFiles/pl_DumperG.bin
@@ -20,10 +16,15 @@ BinFiles/pl_updatesDisable.bin
 BinFiles/pl_updatesEnable.bin
 BinFiles/WebRTE.bin
 
+#Homebrew enablers
+BinFiles/goldhen_212_672.bin
+BinFiles/goldhen_2.2.4_672.bin
+BinFiles/hen213.bin
+BinFiles/hen213b.bin
+
 # The Website Files
-# JS FILES
+# javascript
 common/exploit.js
-common/syscalls.js
 common/exp_loader.js
 common/jb.js
 common/pls_loader.js
