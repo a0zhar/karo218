@@ -25,17 +25,14 @@ BinFiles/WebRTE.bin
 common/exploit.js
 common/syscalls.js
 common/exp_loader.js
+functions.js
 common/jb.js
 common/pls_loader.js
-../../bootstrap/bootstrap.js
+../bootstrap/bootstrap.js
 
 #CSS FILES
-../../bootstrap/bootstrap.css
+../bootstrap/bootstrap.css
 ../ourstyle.css
 
 #html
 index.html
-
-
-NETWORK:
-*
