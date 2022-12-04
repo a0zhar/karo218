@@ -2,7 +2,13 @@
 
 **It's basically the same as his, but with custom modifications and improvements.** <br>
 **This is primarily for personal use, but I decided to make it public.**
-
+  
+  
+    Additional Patch on Update v0.2
+      + Removed (common/syscalls.js) from cache file
+      + Fixed Exploit.js Code
+      + Fixed the landing page
+      
     Update v0.2 (2022/12/04)   Whats new?
       + Removed Unused CSS, and Optimized the rest.
       + You can now see the syscall offsets. 
