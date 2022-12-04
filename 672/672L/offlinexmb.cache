@@ -27,10 +27,10 @@ common/syscalls.js
 common/exp_loader.js
 common/jb.js
 common/pls_loader.js
-../bootstrap/bootstrap.js
+../../bootstrap/bootstrap.js
 
 #CSS FILES
-../bootstrap/bootstrap.css
+../../bootstrap/bootstrap.css
 ../ourstyle.css
 
 #html
