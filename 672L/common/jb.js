@@ -40,5 +40,5 @@ if (main_ret == 179 || main_ret == 0) {
   window.failCounter.innerHTML = localStorage.failcount;
   alert("Jailbreak fail, restart your ps4 and try again");
 }
-
+}
 
