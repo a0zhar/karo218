@@ -8,6 +8,9 @@
   <link rel="stylesheet" href="../bootstrap/bootstrap.css" />
   <link rel="stylesheet" href="../ourstyle.css" />
   <script>
+    console.log = function(e){
+          document.getElementById(id).textContent += e + "\r\n";
+    };
     function logMessage(msg, id) {
       document.getElementById(id).textContent += msg + "\r\n";
     }
